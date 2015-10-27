@@ -1,0 +1,122 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+/*-------------------------------------
+base
+-------------------------------------*/
+*:focus {
+  border: 2px solid #287ad9; }
+
+img {
+  max-width: 100%;
+  vertical-align: middle; }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+a:hover {
+  text-decoration: none; }
+
+body .container, body main {
+  background: #f8f8f8; }
+
+main {
+  margin: 0 auto; }
+
+.slideshow {
+  margin: 0 auto;
+  max-width: 980px;
+  overflow: hidden;
+  position: relative; }
+
+.slideshow-sliders:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.slideshow-sliders li {
+  float: left; }
+
+.slideshow-sliders a {
+  display: block; }
+
+.slideshow-nav {
+  font-size: 2em; }
+  .slideshow-nav a {
+    position: absolute;
+    top: 50%;
+    color: #333;
+    z-index: 100; }
+    .slideshow-nav a:hover {
+      opacity: .7; }
+  .slideshow-nav .prev {
+    left: 3%; }
+  .slideshow-nav .next {
+    right: 3%; }
+  .slideshow-nav .disabled {
+    display: none; }
+
+.slideshow-indicator {
+  bottom: 6px;
+  position: absolute;
+  z-index: 100;
+  right: 3%;
+  text-align: center;
+  letter-spacing: -3px; }
+  .slideshow-indicator li {
+    background: #808080;
+    border-radius: 9px;
+    display: inline-block;
+    height: 16px;
+    margin-left: 6px;
+    overflow: hidden;
+    width: 16px; }
+    .slideshow-indicator li:first-child {
+      margin-left: 0; }
+    .slideshow-indicator li a {
+      display: block; }
+    .slideshow-indicator li span {
+      position: relative;
+      z-index: -1; }
+  .slideshow-indicator .active {
+    background: #00a395; }
+    .slideshow-indicator .active a {
+      cursor: default; }
+
+.no-js .slideshow {
+  height: auto;
+  overflow: inherit; }
+
+.no-js .slideshow-slides {
+  height: auto;
+  position: static; }
+  .no-js .slideshow-slides .li {
+    display: block;
+    height: auto;
+    position: static; }
+    .no-js .slideshow-slides .li img {
+      margin: auto;
+      position: static; }
+
+.no-js .slideshow-nav, .no-js slideshow-indicator {
+  display: none; }
