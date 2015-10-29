@@ -8,6 +8,15 @@ $(function(){
 //
 //---------------------------------------------------------
     
+    //リロード時のチラつき防止
+    //また、チラつき（FOUC）を防止しないと一瞬のcss無効でスクロールバーが表示されてしまう。
+    //その結果幅を取得している要素がスクロールバー分の幅を取得できなくなるため
+    var foucBlock = $('.slideshow img').not(':first');
+    foucBlock.css({'display': 'none'});
+    setTimeout(function(){
+        foucBlock.css({'display': 'block'});
+    });
+    
     $('.slideshow').each(function(){
         
 //        変数の準備
@@ -20,16 +29,29 @@ $(function(){
             $indicator = $container.find('.slideshow-indicator'),
                 
             slideCount = $slides.length,
-            slideWidth = $slides.width(),
-            slideMaxWidth = 980,
+            slideWidth = $slideGroup.width(),
             slideGroupWidth = slideWidth * slideCount,
-            windowWidth,
+            containerWidth = $container.width(),
             indicatorHTML = '',
             currentIndex = 0,
             duration = 500,
             easing = 'easeOutCirc',
-            interval = 4000,
+            interval = 3000,
             timer;
+        
+        console.log(slideWidth);
+        console.log(containerWidth);
+        
+        var sw = window.innerWidth,
+            sW = document.body.clientWidth;
+//            sH = document.body.scrollHeight || document.documentElement.scrollHeight,
+//            sh = window.innerHeight;
+        console.log('bar',sw);
+        console.log('bar2',sW);
+//        console.log('hight',sH);
+//        console.log('hight2',sh);
+        var scrollsize = window.innerWidth - $(window).outerWidth(true);
+        console.log('size',scrollsize);
         
         
 //        tab操作
@@ -118,7 +140,7 @@ $(function(){
         
         // ウィンドウリサイズ時のカルーセルの幅を制御する関数
         function Riseze(originalWidth){
-            slideWidth = originalWidth;
+            slideWidth = originalWidth.width();
             slideGroupWidth = slideWidth * slideCount;
 
             for( var i = 0; i < slideCount; i++){
@@ -126,6 +148,8 @@ $(function(){
             }
             $slideGroup.css({width: slideGroupWidth});
         }
+        
+        
         
 //        イベントの登録
 //----------------------------------------------------------
@@ -162,6 +186,7 @@ $(function(){
         });
         
         //ウィンドウリサイズ時のイベント
+        //リサイズの動作が終わった時のみ動作
         var resizeTime = false;
         
         $(window).resize(function(){
@@ -170,13 +195,7 @@ $(function(){
                 clearTimeout(resizeTime);
             }
             resizeTime = setTimeout(function(){
-                windowWidth = $(window).width();
-                
-                if(windowWidth < slideMaxWidth){
-                    Riseze(windowWidth);
-                }　else {
-                    Riseze(slideMaxWidth);
-                }
+                    Riseze($container);
             },100);
         });
         
