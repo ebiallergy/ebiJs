@@ -39,21 +39,6 @@ $(function(){
             interval = 3000,
             timer;
         
-        console.log(slideWidth);
-        console.log(containerWidth);
-        
-        var sw = window.innerWidth,
-            sW = document.body.clientWidth;
-//            sH = document.body.scrollHeight || document.documentElement.scrollHeight,
-//            sh = window.innerHeight;
-        console.log('bar',sw);
-        console.log('bar2',sW);
-//        console.log('hight',sH);
-//        console.log('hight2',sh);
-        var scrollsize = window.innerWidth - $(window).outerWidth(true);
-        console.log('size',scrollsize);
-        
-        
 //        tab操作
 //----------------------------------------------------------
         
@@ -148,8 +133,6 @@ $(function(){
             }
             $slideGroup.css({width: slideGroupWidth});
         }
-        
-        
         
 //        イベントの登録
 //----------------------------------------------------------
