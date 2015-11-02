@@ -22,9 +22,6 @@ The provided mixins are intended to be used with the array-like variables
 /*-------------------------------------
 base
 -------------------------------------*/
-*:focus {
-  border: 2px solid #287ad9; }
-
 img {
   max-width: 100%;
   vertical-align: middle; }
@@ -56,15 +53,8 @@ slideshows
   overflow: hidden;
   margin: 0 auto;
   max-width: 1200px; }
-  @media only screen and (min-width: 769px) and (max-width: 992px) {
-    .slideshow {
-      max-width: 992px; } }
-  @media only screen and (min-width: 481px) and (max-width: 768px) {
-    .slideshow {
-      max-width: 768px; } }
-  @media only screen and (max-width: 480px) {
-    .slideshow {
-      max-width: 480px; } }
+  .slideshow:focus {
+    border: 2px solid #287ad9; }
 
 .slideshow-sliders:after {
   content: "";
@@ -79,6 +69,9 @@ slideshows
 
 .slideshow-nav {
   font-size: 2em; }
+  @media only screen and (max-width: 480px) {
+    .slideshow-nav {
+      display: none; } }
   .slideshow-nav a {
     position: absolute;
     top: 50%;

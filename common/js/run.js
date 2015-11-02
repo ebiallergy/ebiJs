@@ -13,6 +13,23 @@ $(function(){
     //その結果幅を取得している要素がスクロールバー分の幅を取得できなくなるため
     var foucBlock = $('.slideshow img').not(':first');
     foucBlock.css({'display': 'none'});
+    
+    
+//    if (document.addEventListener) {
+//        $('.slideshow img').get(0).addEventListener('load', FOUC, false);
+//    }
+//    else {
+//        $('.slideshow img').get(0).attachEvent("onLoad", FOUC);
+//    }
+//    
+//    function FOUC(){
+//        foucBlock.css({'display': 'block'});
+//    }
+    
+//    foucBlock.on('load', function(){
+//        foucBlock.css({'display': 'block'});
+//    });
+    
     setTimeout(function(){
         foucBlock.css({'display': 'block'});
     });
@@ -39,7 +56,8 @@ $(function(){
             interval = 3000,
             timer;
         
-//        tab操作
+        
+//      tab操作
 //----------------------------------------------------------
         
         //navにフォーカスが当たらないように
@@ -69,7 +87,7 @@ $(function(){
         //任意のスライドを表示する関数
         function goToSlide(index){
             //スライドグループをターゲットの位置に合わせて移動
-            $slideGroup.animate({ 'margin-left': -100 * index + '%' },duration, easing);
+            $slideGroup.stop().animate({ 'margin-left': -100 * index + '%' },duration, easing);
             
             //現在のスライドのインデックスを上書き
             currentIndex = index;
@@ -134,6 +152,8 @@ $(function(){
             $slideGroup.css({width: slideGroupWidth});
         }
         
+        
+        
 //        イベントの登録
 //----------------------------------------------------------
         
@@ -180,6 +200,64 @@ $(function(){
             resizeTime = setTimeout(function(){
                     Riseze($container);
             },100);
+        });
+        
+        //touchEvent
+        var startX,
+            endX,
+            diffX,
+            absX,
+            marginX,
+            thisCount;
+
+        $slides.on({
+            'touchstart': function(e){
+                stopTimer();
+                
+                startX = event.changedTouches[0].pageX;
+                marginX = parseInt($slideGroup.css('margin-left'));
+                thisCount = $(this).index();
+
+            },
+            'touchmove': function(e){
+                e.preventDefault();
+                stopTimer();
+
+                endX = event.changedTouches[0].pageX;
+                diffX = Math.round(endX - startX);
+                absX = Math.abs(diffX);
+
+                //右にフリックした時、最初のスライド以外の時は右にスライド
+                if(diffX > 0 && !(thisCount === 0)){
+                    $slideGroup.css({'margin-left': marginX + absX + 'px'});
+                    //左にフリックした時、最後のスライド以外の時は右にスライド
+                } else if(diffX < 0 && !(thisCount +1 === slideCount)) {
+                    $slideGroup.css({'margin-left': marginX - absX + 'px'});
+                }
+
+
+            },
+            'touchend': function(e){
+                e.preventDefault();
+                startTimer();
+
+                //スライド幅の1/3以上フリックした時、スライド
+                if(absX > (slideWidth / 3)){
+                    //右にフリックした時、最初のスライド以外の時は右にスライド
+                    if(diffX > 0 && !(thisCount === 0)){
+                        //左にスライド
+                        goToSlide(thisCount - 1);
+
+                        //左にフリックした時、最後のスライド以外の時は右にスライド
+                    } else if(diffX < 0 && !(thisCount +1 === slideCount)) {
+                        //右にスライド
+                        goToSlide(thisCount + 1);
+                    }
+                    //スライド幅の1/3以下フリックした時、元の位置にスライド
+                } else {
+                    goToSlide(thisCount);
+                }
+            }
         });
         
         
