@@ -2,6 +2,68 @@ $(function(){
     
     $('body').removeClass('no-js');
     
+    
+// ---------------------------------------------------------
+//
+//    progress
+//
+//---------------------------------------------------------
+
+//    プログレス実行
+//----------------------------------------------------------
+    imageProgress();
+    
+//    プログレス関数
+//----------------------------------------------------------
+    
+    function imageProgress(){
+        
+        //変数の準備
+        var $container = $('.progress'),
+            $progressBar = $container.find('.progress-bar'),
+            $progressText = $container.find('.progress-text'),
+            
+            //imagesLoadedライブラリで画像の読み込みを取得
+            imgLoad = imagesLoaded('body'),
+            imgTotal = imgLoad.images.length,
+            
+            //リアルタイムで取得した数値を入れる変数
+            imgLoaded = 0,
+            current = 0,
+            
+            //画像読み込み関数の実行間隔を1秒間に60回に
+            progressTimer = setInterval(updateProgress, 1000 / 60);
+        
+        imgLoad.on('progress', function(){
+            imgLoaded++;
+        });
+        
+        function updateProgress(){
+            
+            var target = (imgLoaded / imgTotal) * 100;
+            
+            current += (target - current) * 0.1;
+            
+            $progressBar.css({width: current + '%'});
+            $progressText.text(Math.floor(current) + '%');
+            
+            if(current >= 100){
+                clearInterval(progressTimer);
+                $container.addClass('progress-complete');
+                $progressBar.add($progressText).delay(500).animate({opacity: 0},250, function(){
+                    $container.animate({top: '-100%', opacity: 0});
+                });
+            }
+            
+            if(current > 99.9){
+                current = 100;
+            }
+            
+        }
+    }
+    
+    
+    
 // ---------------------------------------------------------
 //
 //    slideshow
@@ -11,24 +73,9 @@ $(function(){
     //リロード時のチラつき防止
     //また、チラつき（FOUC）を防止しないと一瞬のcss無効でスクロールバーが表示されてしまう。
     //その結果幅を取得している要素がスクロールバー分の幅を取得できなくなるため
+    
     var foucBlock = $('.slideshow img').not(':first');
     foucBlock.css({'display': 'none'});
-    
-    
-//    if (document.addEventListener) {
-//        $('.slideshow img').get(0).addEventListener('load', FOUC, false);
-//    }
-//    else {
-//        $('.slideshow img').get(0).attachEvent("onLoad", FOUC);
-//    }
-//    
-//    function FOUC(){
-//        foucBlock.css({'display': 'block'});
-//    }
-    
-//    foucBlock.on('load', function(){
-//        foucBlock.css({'display': 'block'});
-//    });
     
     setTimeout(function(){
         foucBlock.css({'display': 'block'});
@@ -36,7 +83,7 @@ $(function(){
     
     $('.slideshow').each(function(){
         
-//        変数の準備
+//    変数の準備
 //----------------------------------------------------------
         
         var $container = $(this),
@@ -57,14 +104,14 @@ $(function(){
             timer;
         
         
-//      tab操作
+//    tab操作
 //----------------------------------------------------------
         
         //navにフォーカスが当たらないように
         $nav.children('a').attr('tabindex', -1);
         
         
-//        html要素の配置、生成、挿入
+//    html要素の配置、生成、挿入
 //----------------------------------------------------------
         
         //スライドの幅を各スライドに付与
@@ -81,7 +128,7 @@ $(function(){
         $slideGroup.css({width: slideGroupWidth});
         
         
-//        関数の定義
+//    関数の定義
 //----------------------------------------------------------
         
         //任意のスライドを表示する関数
@@ -154,7 +201,7 @@ $(function(){
         
         
         
-//        イベントの登録
+//    イベントの登録
 //----------------------------------------------------------
         
         //ナビゲーションのリンクをクリックされた該当のスライドを表示
@@ -238,7 +285,6 @@ $(function(){
 
             },
             'touchend': function(e){
-                e.preventDefault();
                 startTimer();
 
                 //スライド幅の1/3以上フリックした時、スライド
@@ -261,7 +307,7 @@ $(function(){
         });
         
         
-//        スライドショーの開始
+//    スライドショーの開始
 //----------------------------------------------------------
         
         //最初のスライド表示
