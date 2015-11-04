@@ -384,8 +384,6 @@ base
 -------------------------------------*/
 * {
   box-sizing: border-box; }
-  *:focus {
-    border: 2px solid #23527c; }
 
 img {
   max-width: 100%;
@@ -485,50 +483,52 @@ headings
   font-size: 2.2rem; }
 
 /*-------------------------------------
-slideshows
+carousel
 -------------------------------------*/
-.slideshow {
+.carousel {
   position: relative;
   overflow: hidden; }
+  .carousel a:focus {
+    border: 2px solid #23527c; }
 
-.slideshow-sliders:after {
+.carousel-item:after {
   content: "";
   display: table;
   clear: both; }
 
-.slideshow-sliders li {
+.carousel-item li {
   float: left; }
 
-.slideshow-sliders a {
+.carousel-item a {
   display: block; }
 
-.slideshow-nav {
+.carousel-nav {
   font-size: 2em; }
   @media only screen and (max-width: 480px) {
-    .slideshow-nav {
+    .carousel-nav {
       display: none; } }
-  .slideshow-nav a {
+  .carousel-nav a {
     position: absolute;
     top: 50%;
     z-index: 100;
     color: #333; }
-    .slideshow-nav a:hover {
+    .carousel-nav a:hover {
       opacity: .7; }
-  .slideshow-nav .prev {
+  .carousel-nav .prev {
     left: 3%; }
-  .slideshow-nav .next {
+  .carousel-nav .next {
     right: 3%; }
-  .slideshow-nav .disabled {
+  .carousel-nav .disabled {
     display: none; }
 
-.slideshow-indicator {
+.carousel-indicator {
   position: absolute;
   right: 3%;
   bottom: 6px;
   z-index: 100;
   text-align: center;
   letter-spacing: -3px; }
-  .slideshow-indicator li {
+  .carousel-indicator li {
     display: inline-block;
     overflow: hidden;
     margin-left: 6px;
@@ -536,34 +536,35 @@ slideshows
     height: 16px;
     border-radius: 9px;
     background: #808080; }
-    .slideshow-indicator li:first-child {
+    .carousel-indicator li:first-child {
       margin-left: 0; }
-    .slideshow-indicator li a {
+    .carousel-indicator li a {
       display: block; }
-    .slideshow-indicator li span {
+    .carousel-indicator li span {
       position: relative;
       z-index: -1; }
-  .slideshow-indicator .active {
+  .carousel-indicator .active {
     background: #00a395; }
-    .slideshow-indicator .active a {
+    .carousel-indicator .active a {
       cursor: default; }
 
-.no-js .slideshow {
+.no-js .carousel {
   overflow: inherit;
   height: auto; }
 
-.no-js .slideshow-slides {
+.no-js .carousel-item {
   position: static;
   height: auto; }
-  .no-js .slideshow-slides .li {
+  .no-js .carousel-item li {
+    float: none;
     position: static;
     display: block;
     height: auto; }
-    .no-js .slideshow-slides .li img {
+    .no-js .carousel-item li img {
       position: static;
       margin: auto; }
 
-.no-js .slideshow-nav, .no-js slideshow-indicator {
+.no-js .carousel-nav, .no-js carousel-indicator {
   display: none; }
 
 /*-------------------------------------
@@ -594,3 +595,6 @@ progresss
 
 .progress-complete .progress-bar {
   border-top-color: #fff; }
+
+.no-js .progress {
+  display: none; }
