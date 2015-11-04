@@ -257,16 +257,17 @@ $(function(){
             'touchstart': function(e){
                 stopTimer();
                 
-                startX = event.changedTouches[0].pageX;
+                startX = e.originalEvent.changedTouches[0].pageX;
                 marginX = parseInt($itemGroup.css('margin-left'));
                 thisCount = $(this).index();
 
+                
             },
             'touchmove': function(e){
                 e.preventDefault();
                 stopTimer();
 
-                endX = event.changedTouches[0].pageX;
+                endX = e.originalEvent.changedTouches[0].pageX;
                 diffX = Math.round(endX - startX);
                 absX = Math.abs(diffX);
 
@@ -284,7 +285,7 @@ $(function(){
                 startTimer();
 
                 //アイテム幅の1/3以上フリックした時、アイテム
-                if(absX > (itemWidth / 3)){
+                if(absX > (itemWidth / 4)){
                     //右にフリックした時、最初のアイテム以外の時は右にアイテム
                     if(diffX > 0 && !(thisCount === 0)){
                         //左にアイテム
