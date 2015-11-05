@@ -358,6 +358,20 @@ td,
 th {
   padding: 0; }
 
+.col-2, .col-3, .col-4 {
+  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
+  margin-left: -15px;
+  margin-left: -1.5rem; }
+  .col-2:after, .col-3:after, .col-4:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .col-2 .col, .col-3 .col, .col-4 .col {
+    float: left; }
+    .col-2 .col .col-body, .col-3 .col .col-body, .col-4 .col .col-body {
+      padding-left: 15px; }
+
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
 
@@ -393,6 +407,7 @@ html {
   font-size: 62.5%; }
 
 h2, p, b {
+  margin: 0 0 15px 0;
   margin: 0 0 1.5rem 0; }
 
 a {
@@ -412,7 +427,9 @@ body {
   background: #efefef;
   font-size: 16px;
   line-height: 16px;
+  font-size: 16px;
   font-size: 1.6rem;
+  line-height: 16px;
   line-height: 1.6rem; }
 
 /*-------------------------------------
@@ -422,19 +439,6 @@ header {
   margin: 0 auto 50px;
   padding: 20px 20px 0;
   max-width: 1200px; }
-  @media only screen and (min-width: 769px) and (max-width: 992px) {
-    header {
-      max-width: 992px; } }
-  @media only screen and (min-width: 481px) and (max-width: 768px) {
-    header {
-      max-width: 768px; } }
-  @media only screen and (max-width: 480px) {
-    header {
-      max-width: 480px; } }
-
-@media only screen and (max-width: 480px) {
-  .js-off .g-nav {
-    display: block; } }
 
 /*-------------------------------------
 contents
@@ -443,15 +447,8 @@ contents
   margin: 0 auto;
   padding: 0 20px;
   max-width: 1200px; }
-  @media only screen and (min-width: 769px) and (max-width: 992px) {
-    .contents {
-      max-width: 992px; } }
-  @media only screen and (min-width: 481px) and (max-width: 768px) {
-    .contents {
-      max-width: 768px; } }
-  @media only screen and (max-width: 480px) {
-    .contents {
-      max-width: 480px; } }
+  .contents section {
+    margin-bottom: 50px; }
 
 /*-------------------------------------
 footer
@@ -459,6 +456,7 @@ footer
 footer {
   margin-top: 50px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 14px;
   font-size: 14px;
   font-size: 1.4rem; }
   footer:before {
@@ -478,9 +476,79 @@ headings
   margin: 0  0 20px 0; }
 
 .hdg-l2 {
-  margin-bottom: 20px;
-  font-size: 22px;
-  font-size: 2.2rem; }
+  margin-bottom: 30px; }
+
+.hdg-l3 {
+  margin: 30px 0 15px;
+  font-size: 20px;
+  font-size: 20px;
+  font-size: 2rem; }
+
+.hdg-l4 {
+  margin: 20px 0 10px;
+  font-size: 16px;
+  font-size: 16px;
+  font-size: 1.6rem; }
+
+/*-------------------------------------
+boxs
+-------------------------------------*/
+.col-2 .col {
+  width: 50%; }
+
+.col-3 .col {
+  width: 33%; }
+
+.col-4 .col {
+  width: 25%; }
+
+/*-------------------------------------
+images
+-------------------------------------*/
+.image-full {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
+  text-align: center; }
+  .image-full .caption {
+    margin-top: 10px;
+    display: block; }
+
+.image-left {
+  margin-bottom: 15px;
+  margin-bottom: 1.5rem; }
+  .image-left:after {
+    content: "";
+    display: table;
+    clear: both; }
+  .image-left .image {
+    float: left; }
+  .image-left .text {
+    overflow: hidden; }
+  .image-left .caption {
+    margin-top: 10px;
+    display: block; }
+
+.hover-effect a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  color: #fff; }
+  .hover-effect a .caption {
+    background: #000;
+    opacity: 0.7;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 100%;
+    left: 100%; }
+  .hover-effect a .caption-inner {
+    text-align: center;
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    left: 0; }
 
 /*-------------------------------------
 carousel
@@ -504,16 +572,14 @@ carousel
 
 .carousel-nav {
   font-size: 2em; }
-  @media only screen and (max-width: 480px) {
-    .carousel-nav {
-      display: none; } }
   .carousel-nav a {
     position: absolute;
     top: 50%;
     z-index: 100;
     color: #333; }
     .carousel-nav a:hover {
-      opacity: .7; }
+      opacity: .7;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; }
   .carousel-nav .prev {
     left: 3%; }
   .carousel-nav .next {
@@ -586,6 +652,7 @@ progresss
 
 .progress-text {
   font-size: 12px;
+  font-size: 12px;
   font-size: 1.2rem;
   position: absolute;
   top: 50%;
@@ -596,5 +663,38 @@ progresss
 .progress-complete .progress-bar {
   border-top-color: #fff; }
 
-.no-js .progress {
+.progress {
   display: none; }
+
+@media only screen and (max-width: 480px) {
+  .col-2 .col, .col-3 .col, .col-4 .col {
+    text-align: center;
+    float: none;
+    margin-bottom: 1.5rem;
+    width: 100%; }
+  .col-2 .col .hdg-l2, .col-3 .col .hdg-l2, .col-4 .col .hdg-l2 {
+    text-align: left; }
+  .col-2 .col .hdg-l3, .col-3 .col .hdg-l3, .col-4 .col .hdg-l3 {
+    text-align: left; }
+  .col-2 .col .hdg-l4, .col-3 .col .hdg-l4, .col-4 .col .hdg-l4 {
+    text-align: left; }
+  header {
+    max-width: 480px; }
+  .js-off .g-nav {
+    display: block; }
+  .contents {
+    max-width: 480px; }
+  .carousel-nav {
+    display: none; } }
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  header {
+    max-width: 992px; }
+  .contents {
+    max-width: 992px; } }
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  header {
+    max-width: 768px; }
+  .contents {
+    max-width: 768px; } }
