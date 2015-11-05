@@ -68,67 +68,6 @@ $(function(){
     
 // ---------------------------------------------------------
 //
-//    hoverEffect
-//
-//---------------------------------------------------------
-
-
-//    hoverEffect実行
-//----------------------------------------------------------
-    $('.hover-effect').on('mouseenter mouseleave', 'a', hoverEffect);
-
-
-//    hoverEffect関数
-//----------------------------------------------------------
-    
-    function hoverEffect(e){
-        var $overlay = $(this).find('.caption'),
-            side = getMouseDirection(e),
-            animateTo,
-            positionIn = {
-                top: '0%',
-                left: '0%'
-            },
-
-            positionOut = (function(){
-                switch(side){
-                    case 0: return {top: '-100%', left: '0%'};
-                            break;
-                    case 1: return {top: '0%', left: '100%'};
-                            break;
-                    case 2: return {top: '100%', left: '0%'};
-                            break;
-                    default: return {top: '0%', left: '-100%'};
-                            break;
-                }
-            })();
-
-        if(e.type === 'mouseenter'){
-           animateTo = positionIn;
-           $overlay.css(positionOut);
-           } else {
-               animateTo = positionOut;
-           }
-
-        $overlay.stop(true).animate(animateTo, 250, 'easeOutExpo');
-    }
-
-    //マウスイン、マウスアウトの場所を判定。0が上、1が右、2が下、3が左
-    function getMouseDirection(e){
-        var $el = $(e.currentTarget),
-            offset = $el.offset(),
-            w = $el.outerWidth(),
-            h = $el.outerHeight(),
-            x = (e.pageX - offset.left - w / 2) * ((w > h)? h / w: 1),
-            y = (e.pageY - offset.top - h / 2) * ((h > w)? w / h: 1),
-            direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
-
-        return direction;
-    }
-    
-    
-// ---------------------------------------------------------
-//
 //    carousel
 //
 //---------------------------------------------------------
@@ -374,4 +313,92 @@ $(function(){
         startTimer();
         
     });
+
+
+//---------------------------------------------------------
+//
+//    hoverEffect
+//
+//---------------------------------------------------------
+
+
+//    hoverEffect実行
+//----------------------------------------------------------
+$('.hover-effect').on('mouseenter mouseleave', 'a', hoverEffect);
+
+
+//    hoverEffect関数
+//----------------------------------------------------------
+
+function hoverEffect(e){
+    var $overlay = $(this).find('.caption'),
+        side = getMouseDirection(e),
+        animateTo,
+        positionIn = {
+            top: '0%',
+            left: '0%'
+        },
+
+        positionOut = (function(){
+            switch(side){
+                case 0: return {top: '-100%', left: '0%'};
+                    break;
+                case 1: return {top: '0%', left: '100%'};
+                    break;
+                case 2: return {top: '100%', left: '0%'};
+                    break;
+                default: return {top: '0%', left: '-100%'};
+                    break;
+            }
+        })();
+
+    if(e.type === 'mouseenter'){
+        animateTo = positionIn;
+        $overlay.css(positionOut);
+    } else {
+        animateTo = positionOut;
+    }
+
+    $overlay.stop(true).animate(animateTo, 250, 'easeOutExpo');
+}
+
+//マウスイン、マウスアウトの場所を判定。0が上、1が右、2が下、3が左
+function getMouseDirection(e){
+    var $el = $(e.currentTarget),
+        offset = $el.offset(),
+        w = $el.outerWidth(),
+        h = $el.outerHeight(),
+        x = (e.pageX - offset.left - w / 2) * ((w > h)? h / w: 1),
+        y = (e.pageY - offset.top - h / 2) * ((h > w)? w / h: 1),
+        direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+
+    return direction;
+}
+    
+    
+//---------------------------------------------------------
+//
+//    hamburger menu
+//
+//---------------------------------------------------------
+    
+   var menu = $('.header-menu'),
+       menuLength = menu.length;
+    
+   for(var i = 0; i < menuLength; i++){
+       menu.eq(i).attr('id', '0' + i);
+   }
+    
+   menu.on('click', function(){
+       var hoge = $(this).attr('id'),
+           on = 'header-menu-on-' + hoge,
+           off = 'header-menu-off-' + hoge;
+
+       if($(this).hasClass(on)){
+           $(this).removeClass(on).addClass(off);
+       } else {
+           $(this).removeClass(off).addClass(on);
+       }
+   });
+    
 });
