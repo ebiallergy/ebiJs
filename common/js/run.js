@@ -401,4 +401,25 @@ function getMouseDirection(e){
        }
    });
     
+    
+//---------------------------------------------------------
+//
+//    videoSwitch
+//
+//---------------------------------------------------------
+    
+    var $videoSwitch = $('.video-switch'),
+        $switchBtnGroup = $videoSwitch.find('.switch-btn'),
+        $switchBtn = $switchBtnGroup.find('a'),
+        $switchItem = $videoSwitch.find('.youtube iframe');
+    
+    $switchBtn.eq(0).addClass('current');
+
+    $switchBtn.on('click', function(e){
+        e.preventDefault();
+        
+        $switchBtn.removeClass('current');
+        $(this).addClass('current');
+        $switchItem.attr('src', this.href);
+    });
 });
