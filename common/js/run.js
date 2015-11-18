@@ -331,19 +331,9 @@ $(function(){
             sliderMiniWidth = sliderWidth * 0.4,
             slideGroupWidth = sliderMiniWidth * sliderLength;
         
-        console.log(slideGroupWidth);
-        
         $sliders.width(sliderMiniWidth);
         $slideGroup.width(slideGroupWidth);
-        
-        
-        
     });
-    
-    
-    
-    
-    
     
 
 //---------------------------------------------------------
