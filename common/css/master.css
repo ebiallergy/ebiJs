@@ -1694,6 +1694,43 @@ carousel
   display: none; }
 
 /*-------------------------------------
+slider
+-------------------------------------*/
+.slider {
+  display: none;
+  overflow-x: scroll; }
+  .slider a:focus {
+    border: 2px solid #23527c; }
+
+.slider-item:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.slider-item li {
+  float: left; }
+
+.slider-item a {
+  display: block;
+  max-width: 100%; }
+
+.no-js .slider {
+  overflow: inherit;
+  height: auto; }
+
+.no-js .slider-item {
+  position: static;
+  height: auto; }
+  .no-js .slider-item li {
+    float: none;
+    position: static;
+    display: block;
+    height: auto; }
+    .no-js .slider-item li img {
+      position: static;
+      margin: auto; }
+
+/*-------------------------------------
 progresss
 -------------------------------------*/
 .progress {
@@ -1723,7 +1760,7 @@ progresss
 .progress-complete .progress-bar {
   border-top-color: #fff; }
 
-.no-js .progress {
+.progress {
   display: none; }
 
 @media only screen and (max-width: 480px) {
@@ -1748,7 +1785,9 @@ progresss
     padding-top: 56.25%;
     width: 100%; }
   .carousel-nav {
-    display: none; } }
+    display: none; }
+  .slider {
+    display: block; } }
 
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   header {

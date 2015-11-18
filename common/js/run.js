@@ -314,6 +314,37 @@ $(function(){
         
     });
 
+//---------------------------------------------------------
+//
+//    sliders
+//
+//---------------------------------------------------------
+    
+    $('.slider').each(function(){
+        
+        var $contaner = $(this),
+            $slideGroup = $contaner.find('.slider-item'),
+            $sliders = $contaner.find('li'),
+            
+            sliderLength = $sliders.length,
+            sliderWidth = $sliders.width(),
+            sliderMiniWidth = sliderWidth * 0.4,
+            slideGroupWidth = sliderMiniWidth * sliderLength;
+        
+        console.log(slideGroupWidth);
+        
+        $sliders.width(sliderMiniWidth);
+        $slideGroup.width(slideGroupWidth);
+        
+        
+        
+    });
+    
+    
+    
+    
+    
+    
 
 //---------------------------------------------------------
 //
